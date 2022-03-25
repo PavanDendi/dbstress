@@ -57,9 +57,9 @@ class DatabaseActor(
         val initFuture = Future {
           urConfig.dbConfig.driverClass.foreach(Class.forName)
           DriverManager.getConnection(
-            urConfig.dbConfig.uri,
+            urConfig.dbConfig.uri/**,
             urConfig.dbConfig.username,
-            urConfig.dbConfig.password
+            urConfig.dbConfig.password**/
           )
         }(dbDispatcher)
 

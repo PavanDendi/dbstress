@@ -2,12 +2,13 @@ package eu.semberal.dbstress.config
 
 import java.io.BufferedReader
 import java.util.{Map => JMap}
+import collection.JavaConverters._
 
 import better.files._
 import eu.semberal.dbstress.model.Configuration._
 import org.yaml.snakeyaml.Yaml
 
-import scala.jdk.CollectionConverters._
+// import scala.jdk.CollectionConverters._
 import scala.reflect.ClassTag
 import scala.util.{Failure, Success, Try}
 

@@ -88,7 +88,7 @@ class ControllerActor(sc: ScenarioConfig) extends Actor with LazyLogging {
         else ""
       logger.info("All database operations finished {}", msg)
       val unitResultMap =
-        unitRunResults.groupBy(_._1).view.mapValues(_.map(_._2))
+        unitRunResults.groupBy(_._1).mapValues(_.map(_._2))
       client ! ScenarioResult(
         sc.units.map(conf => UnitResult(conf, unitResultMap(conf.name))).toList
       )

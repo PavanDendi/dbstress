@@ -1,5 +1,5 @@
 object Versions {
-  val scala = "2.13.8"
+  val scala = "2.12.14"
   val akka = "2.6.18"
   val scalaLogging = "3.9.4"
   val snakeYaml = "1.30"
