@@ -1,10 +1,8 @@
-# dbstress
+# sql⚡torm
 
- [![GitHub Actions](https://github.com/semberal/dbstress/workflows/build/badge.svg)](https://github.com/semberal/dbstress/actions)
+### sql⚡torm is a fork of [dbstress](https://github.com/semberal/dbstress/)
 
-## Introduction
-
-_dbstress_ is an open-source database performance and stress testing tool written in
+sql⚡torm is an open-source database performance and stress testing tool written in
 [Scala](http://www.scala-lang.org/) and [Akka](http://akka.io). It runs a database query
 (using a database-specific JDBC driver) certain number of times in parallel (possibly against multiple database hosts)
 and generates a CSV with summarized results.
