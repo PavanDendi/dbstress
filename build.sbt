@@ -17,13 +17,24 @@ val dependencies = Seq(
   "org.postgresql" % "postgresql" % Versions.postgres % "test, it, provided"
 )
 
+// resolvers += "S3" at "s3://db-field-eng-mvn/"
+
 lazy val dbstresss = (project in file("."))
   .enablePlugins(PackPlugin)
   .settings(
-    organization := "eu.semberal",
-    name := "dbstress",
-    version := sys.env.getOrElse("DBSTRESS_VERSION", "0.0.0-SNAPSHOT"),
+    organization := "com.databricks.labs",
+    name := "sqlstorm",
+    version := sys.env.getOrElse("SQLSTORM_VERSION", "0.0.0-SNAPSHOT"),
     scalaVersion := Versions.scala,
+    publishMavenStyle := true,
+    publishTo := {
+        val s3root = "s3://db-field-eng-mvn/"
+        if (isSnapshot.value)
+           // Some("S3" at s3root + "snapshot/")
+            Some("S3" at s3root + "snapshot/")
+        else
+            Some("S3" at s3root + "release/")
+    },
     scalacOptions ++= Seq(
       "-target:jvm-1.8",
       "-unchecked",
@@ -31,12 +42,14 @@ lazy val dbstresss = (project in file("."))
       "-feature",
       "-Xfatal-warnings",
       "-Ywarn-unused:imports"
-    )
-  )
+    ),
+    awsProfile := Some("aws-field-eng_databricks-power-user"),
+    s3region := Region("us-west-1")  
+)
   .configs(IntegrationTest)
   .settings(Defaults.itSettings: _*)
   .settings(libraryDependencies ++= dependencies: _*)
-  .settings(packMain := Map("dbstress" -> "eu.semberal.dbstress.Main"))
+  .settings(packMain := Map("sqlstorm" -> "eu.semberal.dbstress.Main"))
   .settings(
     inConfig(IntegrationTest)(
       org.scalafmt.sbt.ScalafmtPlugin.scalafmtConfigSettings
